@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sign in or create an account for your private career dashboard." />
+  <title>Sign in | Internship Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <p class="eyebrow">Private career dashboard</p>
+      <h1 id="auth-title">Welcome back</h1>
+      <p id="auth-description" class="auth-description">Sign in to continue to your application tracker.</p>
+
+      <div class="auth-tabs" role="tablist" aria-label="Account access">
+        <button id="login-tab" class="auth-tab active" type="button" role="tab" aria-selected="true">Sign in</button>
+        <button id="register-tab" class="auth-tab" type="button" role="tab" aria-selected="false">Create account</button>
+      </div>
+
+      <form id="auth-form" class="auth-form">
+        <label class="input-group">
+          <span>Username</span>
+          <input id="username" name="username" type="text" autocomplete="username" minlength="3" maxlength="32" required />
+        </label>
+        <label class="input-group">
+          <span>Password</span>
+          <input id="password" name="password" type="password" autocomplete="current-password" minlength="10" maxlength="128" required />
+        </label>
+        <p id="password-hint" class="password-hint" hidden>Use at least 10 characters. Your password is stored securely as a hash.</p>
+        <button id="submit-button" class="auth-submit" type="submit">Sign in</button>
+      </form>
+
+      <p id="auth-message" class="flash auth-message" aria-live="polite"></p>
+      <p class="auth-footnote">Your applications are private to your account.</p>
+    </section>
+  </main>
+  <script src="login.js"></script>
+</body>
+</html>

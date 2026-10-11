@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internship Tracker</title>
+  <meta name="description" content="Track internship and job applications in one place." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <main class="container">
+      <header class="header">
+        <div>
+          <p class="eyebrow">Career dashboard</p>
+          <h1>Internship Tracker</h1>
+        </div>
+        <div class="account-controls">
+          <span id="account-name" class="account-name"></span>
+          <button id="logout-button" class="logout-btn" type="button">Sign out</button>
+        </div>
+      </header>
+
+      <section class="overview-grid" aria-label="Application overview">
+        <article class="stat-card">
+          <span class="stat-label">Total</span>
+          <strong id="stat-total">0</strong>
+          <small>All applications</small>
+        </article>
+        <article class="stat-card applied">
+          <span class="stat-label">Applied</span>
+          <strong id="stat-applied">0</strong>
+          <small>Submitted</small>
+        </article>
+        <article class="stat-card interview">
+          <span class="stat-label">Interview</span>
+          <strong id="stat-interview">0</strong>
+          <small>In progress</small>
+        </article>
+        <article class="stat-card offer">
+          <span class="stat-label">Offer</span>
+          <strong id="stat-offer">0</strong>
+          <small>Success</small>
+        </article>
+      </section>
+
+      <form id="app-form" class="app-form">
+        <label class="input-group">
+          <span>Company</span>
+          <input type="text" id="company" placeholder="e.g. Contoso Labs" required />
+        </label>
+        <label class="input-group">
+          <span>Role</span>
+          <input type="text" id="role" placeholder="e.g. DevOps Engineer" required />
+        </label>
+        <button type="submit">Add application</button>
+      </form>
+
+      <div id="flash" class="flash" aria-live="polite"></div>
+
+      <div class="panel-header">
+        <h2>Application pipeline</h2>
+        <p class="counter">Total applications: <span id="count">0</span></p>
+      </div>
+
+      <ul id="app-list" aria-live="polite"></ul>
+      <p id="empty-msg" class="empty">No applications yet. Add your first one above.</p>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
