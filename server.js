@@ -389,29 +389,27 @@ function saveSession(req) {
   });
 }
 
+// Create the Express application
+const application = createApp();
+const app = application.app;
+
+// Export the Express app for Vercel
+module.exports = app;
+
+// Start a normal HTTP server when running locally
 if (require.main === module) {
-  let application;
-  try {
-    application = createApp();
-  } catch (error) {
-    console.error('Unable to start Internship Tracker:', error.message);
-    process.exitCode = 1;
-  }
+  const PORT = process.env.PORT || 3000;
+  const server = app.listen(PORT, () => {
+    console.log(`Internship Tracker running on port ${PORT}`);
+  }); 
 
-  if (application) {
-    const PORT = process.env.PORT || 3000;
-    const server = application.app.listen(PORT, '0.0.0.0', () => {
-      console.log(`Internship Tracker running on port ${PORT}`);
+  const shutdown = () => {
+    server.close(() => {
+      application.close();
+      process.exit(0);
     });
-    const shutdown = () => {
-      server.close(() => {
-        application.close();
-        process.exit(0);
-      });
-    };
-    process.on('SIGINT', shutdown);
-    process.on('SIGTERM', shutdown);
-  }
-}
+  };
 
-module.exports = { createApp };
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
+}
