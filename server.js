@@ -398,18 +398,32 @@ module.exports = app;
 
 // Start a normal HTTP server when running locally
 if (require.main === module) {
-  const PORT = process.env.PORT || 3000;
-  const server = app.listen(PORT, () => {
-    console.log(`Internship Tracker running on port ${PORT}`);
-  }); 
+  let application;
 
-  const shutdown = () => {
-    server.close(() => {
-      application.close();
-      process.exit(0);
+  try {
+    application = createApp();
+  } catch (error) {
+    console.error('Unable to start Internship Tracker:', error.message);
+    process.exitCode = 1;
+  }
+
+  if (application) {
+    const PORT = process.env.PORT || 3000;
+
+    const server = application.app.listen(PORT, () => {
+      console.log(`Internship Tracker running on port ${PORT}`);
     });
-  };
 
-  process.on('SIGINT', shutdown);
-  process.on('SIGTERM', shutdown);
+    const shutdown = () => {
+      server.close(() => {
+        application.close();
+        process.exit(0);
+      });
+    };
+
+    process.on('SIGINT', shutdown);
+    process.on('SIGTERM', shutdown);
+  }
 }
+
+module.exports = { createApp };
